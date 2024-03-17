@@ -1,0 +1,10 @@
+*venv*
+
+.idea
+
+poetry.lock
+
+# Byte-compiled
+*.py[co]
+
+*__pycache__*
