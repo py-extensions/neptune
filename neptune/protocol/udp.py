@@ -3,10 +3,10 @@ from asyncio import DatagramProtocol
 from math import inf
 from typing import ClassVar
 
+from neptune.controller import DNSController
 from neptune.model.dns.message import DNSMessage
 from neptune.protocol.protocol import Protocol, SupportedProtocol
 from neptune.types import BitArray
-from neptune.controller import DNSController
 
 
 class DNSUDPProtocol(DatagramProtocol, Protocol):

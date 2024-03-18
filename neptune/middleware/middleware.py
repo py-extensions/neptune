@@ -2,7 +2,6 @@ import typing
 from abc import ABC, abstractmethod
 from functools import wraps
 
-
 if typing.TYPE_CHECKING:
     from neptune.controller import DNSController
     from neptune.model.dns.message import DNSMessage
@@ -27,11 +26,7 @@ def apply_middleware(middleware_cls: type[Middleware]):
     def decorator(func):
         @wraps(func)
         def wrapper(
-            controller: "DNSController",
-            message: "DNSMessage",
-            ctx: dict,
-            *args,
-            **kwargs
+            controller: "DNSController", message: "DNSMessage", ctx: dict, *args, **kwargs
         ):
             middleware = middleware_cls(ctx=ctx)
 

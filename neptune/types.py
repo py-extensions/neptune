@@ -1,23 +1,13 @@
 import copy
 import ipaddress
+import sys
 from abc import abstractmethod
 from enum import Enum
 from functools import wraps
-from typing import (
-    Any,
-    Callable,
-    ClassVar,
-    Optional,
-    ParamSpec,
-    Self,
-    Type,
-    TypeVar,
-    Union,
-    cast,
-)
-from pydantic_core import core_schema
+from typing import Any, Callable, ClassVar, Optional, ParamSpec, Self, Type, TypeVar, Union, cast
+
 from pydantic.json_schema import GetJsonSchemaHandler, JsonSchemaValue
-import sys
+from pydantic_core import core_schema
 
 UNDEFINED = object()
 
@@ -178,9 +168,7 @@ class BaseDNSType:
 
     @classmethod
     @convert_machine_endian
-    def _peek_bits(
-        cls, data: BitArray, length: int = None, offset: int = 0
-    ) -> list[int]:
+    def _peek_bits(cls, data: BitArray, length: int = None, offset: int = 0) -> list[int]:
         return data.peek(length or cls.LENGTH, offset)
 
     @classmethod
@@ -252,9 +240,7 @@ class Integer(BaseDNSType):
         if not self.SIGNED:
             return [(self.value >> i) & 1 for i in range(self.LENGTH)]
         else:
-            return [(self.value >> i) & 1 for i in range(self.LENGTH - 1)] + [
-                int(self.value < 0)
-            ]
+            return [(self.value >> i) & 1 for i in range(self.LENGTH - 1)] + [int(self.value < 0)]
 
     @classmethod
     def _validate(
@@ -364,9 +350,7 @@ class String(BaseDNSType):
         return cls(result)
 
     @classmethod
-    def _validate(
-        cls, value: Union[str, bytes, Self], info: core_schema.ValidationInfo
-    ) -> str:
+    def _validate(cls, value: Union[str, bytes, Self], info: core_schema.ValidationInfo) -> str:
         if isinstance(value, cls):
             value = value.value
 
@@ -447,11 +431,7 @@ class DomainName(UTF8String):
         result = ""
 
         while uint8.peek(data) != 0:
-            result += (
-                super()
-                .from_bits(data, ctx={"length": uint8.from_bits(data).value})
-                .value
-            )
+            result += super().from_bits(data, ctx={"length": uint8.from_bits(data).value}).value
             print(result)
 
             try:
@@ -496,9 +476,7 @@ class Pointer(UnsignedInteger):
 
 
 def _generate_int_type(int_length: int, int_type: Type[Integer]) -> Type[Integer]:
-    return cast(
-        Type[int_type], type(f"int{int_length}", (int_type,), {"LENGTH": int_length})
-    )
+    return cast(Type[int_type], type(f"int{int_length}", (int_type,), {"LENGTH": int_length}))
 
 
 class IPAddressMixin(BaseDNSType):
@@ -516,9 +494,7 @@ class IPAddressMixin(BaseDNSType):
         return cls(data.read_bytes(cls.LENGTH // 8))  # type: ignore
 
     @classmethod
-    def _validate(
-        cls, value: Union[str, bytes], info: core_schema.ValidationInfo
-    ) -> str:
+    def _validate(cls, value: Union[str, bytes], info: core_schema.ValidationInfo) -> str:
         try:
             cls(value)  # type: ignore
         except ValueError as e:

@@ -4,14 +4,7 @@ from typing import ClassVar, Union
 from pydantic import Field
 
 from neptune.model.dns.common import BaseDNSModel
-from neptune.types import (
-    DomainName,
-    IPv4Address,
-    IPv6Address,
-    String,
-    UNDEFINED,
-    int32,
-)
+from neptune.types import UNDEFINED, DomainName, IPv4Address, IPv6Address, String, int32
 
 
 class DNSData(BaseDNSModel):
@@ -51,9 +44,7 @@ class SOA(DNSData):
 
     ID: ClassVar[int] = 6
 
-    name_server: DomainName = Field(
-        ..., description="The primary name server.", alias="mname"
-    )
+    name_server: DomainName = Field(..., description="The primary name server.", alias="mname")
     mailbox: DomainName = Field(
         ..., description="The responsible authority's mailbox.", alias="rname"
     )

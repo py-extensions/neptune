@@ -2,12 +2,9 @@ from typing import Annotated, Any, Self, Union
 
 from pydantic import Field
 
-from neptune.model.dns.common import (
-    BaseDNSModel,
-    SupportedQueryClasses,
-)
+from neptune.model.dns.common import BaseDNSModel, SupportedQueryClasses
 from neptune.model.dns.data import DATA_MAP, DNSDataType, SupportedQueryTypes
-from neptune.types import BitArray, DomainName, Pointer, int16, uint16, uint32
+from neptune.types import DomainName, Pointer, int16, uint16, uint32
 
 
 class DNSMessageAnswer(BaseDNSModel):
@@ -24,9 +21,7 @@ class DNSMessageAnswer(BaseDNSModel):
         Field(description="Type of the answer.", alias="TYPE"),
     ]
 
-    cls: Annotated[
-        uint16, SupportedQueryClasses, Field(description="Class of the answer.")
-    ]
+    cls: Annotated[uint16, SupportedQueryClasses, Field(description="Class of the answer.")]
 
     ttl: uint32 = Field(..., description="Time to live for the answer.", alias="TTL")
 

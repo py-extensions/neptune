@@ -5,7 +5,7 @@ from pydantic import Field
 from neptune.model.dns.answer import DNSMessageAnswer
 from neptune.model.dns.common import BaseDNSModel
 from neptune.model.dns.question import DNSMessageQuestion
-from neptune.types import boolean, int3, uint16, uint4
+from neptune.types import boolean, int3, uint4, uint16
 
 
 class DNSMessage(BaseDNSModel):
@@ -77,9 +77,7 @@ class DNSMessage(BaseDNSModel):
 
     reserved: int3 = Field(
         ...,
-        description=(
-            "Reserved for future use. Must be zero in all queries and responses."
-        ),
+        description=("Reserved for future use. Must be zero in all queries and responses."),
         alias="Z",
     )
 

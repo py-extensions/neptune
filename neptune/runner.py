@@ -2,9 +2,8 @@ import asyncio
 
 from fastapi import FastAPI
 
-from neptune.api import routers
 import neptune.protocol.udp
-
+from neptune.api import routers
 
 app = FastAPI()
 

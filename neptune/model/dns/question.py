@@ -2,10 +2,7 @@ from typing import Annotated, Any, Self, Union
 
 from pydantic import Field
 
-from neptune.model.dns.common import (
-    BaseDNSModel,
-    SupportedQueryClasses,
-)
+from neptune.model.dns.common import BaseDNSModel, SupportedQueryClasses
 from neptune.model.dns.data import SupportedQueryTypes
 from neptune.types import DomainName, Pointer, uint16
 

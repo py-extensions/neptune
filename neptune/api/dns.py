@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from neptune.model.dns.message import DNSMessage
 
+from neptune.model.dns.message import DNSMessage
 
 router = APIRouter()
 

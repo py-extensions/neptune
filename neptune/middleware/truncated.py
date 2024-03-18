@@ -1,5 +1,6 @@
-from neptune.middleware.middleware import Middleware
 import typing
+
+from neptune.middleware.middleware import Middleware
 
 if typing.TYPE_CHECKING:
     from neptune.model.dns.message import DNSMessage

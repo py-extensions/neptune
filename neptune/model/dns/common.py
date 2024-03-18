@@ -1,10 +1,9 @@
 import logging
-from typing import ClassVar, Self, cast, Optional, Any, get_args, get_origin, Union
+from typing import Any, ClassVar, Optional, Self, Union, cast, get_args, get_origin
 
 from pydantic import BaseModel
 
 from neptune.types import BaseDNSType, BitArray
-
 
 LOG = logging.getLogger(__name__)
 
