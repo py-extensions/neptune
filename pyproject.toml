@@ -24,3 +24,28 @@ autoflake = "^2.3.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 99
+
+[tool.black]
+line_length = 99
+target_version = ["py312"]
+
+[tool.pylint]
+target_versions = ["py312"]
+max-line-length = 99
+disable = ["protected-access", "missing-module-docstring", "broad-exception-caught"]
+
+[tool.autoflake]
+remove-all-unused-imports = true
+remove-duplicate-keys = true
+remove-unused-variables = true
+in-place = true
+recursive = true
+
+[tool.pytest]
+asyncio-mode = true
